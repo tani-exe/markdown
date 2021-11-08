@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+  <title>Markdown Editor</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<script src='https://cdn.jsdelivr.net/gh/rsms/markdown-wasm@v1.1.2/dist/markdown.js'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.css" integrity="sha512-o7UZzJ8aVn5UbwLnpWws07+KCFbonPVPNWVowgNmAkBL4kmgzgQzh2FMFuTEZKyGCEcM9Dv5Hodq73zAFdsqAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div id='app'>
+  <textarea @input='change' v-model='md' rows="40" cols="50"></textarea>
+  <article class="markdown-body" v-html='html'></article>
+</div>  
+<style>
+article {
+  float: left;
+  width: 400px;
+}
+textarea {
+  float: left;
+}
+</style>
+<script>
+    new Vue({
+  el: '#app',
+  data: {
+    html: '',
+    md: '#Markdown',
+  },
+  methods: {
+    change() {
+      this.html = markdown.parse(this.md)
+    }
+  }
+})
+</script>
+</body>
